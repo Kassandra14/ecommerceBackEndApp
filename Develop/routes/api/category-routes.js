@@ -1,6 +1,6 @@
 const router = require('express').Router();
 //const { json } = require('sequelize/types');
-const { Category, Product, ProductTag, Tag } = require('../../models');
+const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
@@ -11,9 +11,10 @@ router.get('/', async (req, res) => {
     const categoryData = await Category.findAll(
       {
         include: [{ model: Product }]
-      }
-    );
-      res.status(200).json(err);
+     
+      });
+      console.log(categoryData);
+      res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -25,7 +26,9 @@ router.get('/:id', async (req, res) => {
   try {
     const categoryData = await Category.findByPk(req.params.id,
       {
-        include: [{ model: Product }]
+        include: [{ model: Product,
+          attributes: ['id', 'product_name', 'price', 'stock'],
+         }]
       })
     
     if (!categoryData) {
