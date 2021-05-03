@@ -8,8 +8,6 @@ const ProductTag = require('./ProductTag');
 Product.belongsToMany(Tag, {
    through: { 
    model: ProductTag,
-  //foreignKey: "reader_id",
-  //onDelete: "CASCADE",
   },
   //defines alt for when data is retrieved
   as: "product_tag"
@@ -24,8 +22,6 @@ Product.belongsTo(Category, {
 Tag.belongsToMany(Product, { 
   through: { 
     model: ProductTag,
- //  foreignKey: "reader_id",
- //  onDelete: "CASCADE",
   },
   as: "tag_data"
  });
