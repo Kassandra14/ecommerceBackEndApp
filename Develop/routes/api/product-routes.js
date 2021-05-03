@@ -5,36 +5,36 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 // be sure to include its associated Category and Tag data
+
 router.get('/', async (req, res) => {
-  try {
-  const productData = await Product.findAll({
-      include: [{ model: Category },
-        {
-          model: Tag, through: ProductTag, as: 'product_tag' },
-        ]
-      //{ model: Tag, through: ProductTag, as: 'product_tags'}
-  });
-  res.status(200).json(productData);
-} catch (err) {
-  res.status(500).json(err);
-  }
+
+Product.findAll({
+    include: [{ model: Category
+      },
+      { model: Tag, through: ProductTag, as: 'product_tag' },
+      ]
+   }).then((productData) => {
+    res.json(productData)
 });
+});
+
 
 // get one product
 // find a single product by its `id`
   // be sure to include its associated Category and Tag data
-router.get('/:id', async (req, res) => {
-  try {
-    const productData = await productData.findByPk(req.params.id, {
-      include: [
-        { model: Category },
-        { model: Tag, through: ProductTag, as: 'product_tag' }],
-      });
+  router.get('/:id', async (req, res) => {
+    try {
+      const productData = await Product.findByPk(req.params.id, {
+        include: [
+          { model: Category },
+          { model: Tag, through: ProductTag, as: 'product_tag' }],
+        });
+  
+      if (!productData) {
+        res.status(404).json({ message: 'bad request'});
+        return;
+      }
 
-    if (!productData) {
-      res.status(404).json({ message: 'bad request'});
-      return;
-    }
       
     res.status(200).json(productData);
     } catch (err) {
@@ -46,10 +46,11 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   // req.body should look like this...
     // {
-    //   product_name: 'Basketball',
-    //   price: 200.00,
-    //   stock: 3,
-    //   tagIds: [1, 2, 3, 4]
+    //    "id": 8,     
+	// "product_name": "Basketball",
+	// "price": 100.00,
+	// "stock": 3,
+	// "category_id": 5
     // }
   
   Product.create(req.body)

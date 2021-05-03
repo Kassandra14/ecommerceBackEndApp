@@ -12,7 +12,7 @@ Product.belongsToMany(Tag, {
   //onDelete: "CASCADE",
   },
   //defines alt for when data is retrieved
-  as: "product_tags"
+  as: "product_tag"
 });
 
 //Product belongsTo Category
