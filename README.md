@@ -2,9 +2,7 @@
 
 ## Description
 
-This app
-
-IThis app uses and node and express.js API with Sequelize to sync with a mySQL database.  It is the backend CLI app structure with all the API routes and calls for an ecommerce store.
+This app uses and node and express.js API with Sequelize to sync with a mySQL database.  It is the backend CLI app structure with all the API routes and calls for an ecommerce store.
 
 Your task is to build the back end for an e-commerce site by modifying starter code. You’ll configure a working Express.js API to use Sequelize to interact with a MySQL database.
 
